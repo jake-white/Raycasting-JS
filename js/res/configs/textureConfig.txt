@@ -1,0 +1,5 @@
+//format =
+//type red green blue
+cobble 64 64 64
+mossy 0 255 0
+redbrick 127 51 0
