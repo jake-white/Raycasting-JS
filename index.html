@@ -1,0 +1,27 @@
+<html>
+<script src = "js/Screen.js"></script>
+<script src = "js/World.js"></script>
+<script src = "js/Tracer.js"></script>
+<title>Raycasting Engine</title>
+<body onload = "main()">
+<canvas id = "canvas" width = "800" height = "600" style="border:1px solid black;></canvas>
+<p id = "label"></p>
+</body>
+<script>
+var canvas = document.getElementById("canvas");
+var s, t;
+var milli = 20;
+var main = function()
+{
+	s = new Screen(canvas);
+	t = new Tracer();
+	
+	setInterval(tick, milli);
+}
+var tick = function()
+{
+	t.trace();
+	s.draw();
+}
+</script>
+</html>
