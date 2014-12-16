@@ -1,28 +1,28 @@
 <html>
-<script type = "text/javascript" src = "js/Screen.js"></script>
 <script type = "text/javascript" src = "js/Tracer.js"></script>
+<script type = "text/javascript" src = "js/DrawingScreen.js"></script>
 <title>Raycasting Engine</title>
 <body onload = "main()">
-<canvas id = "canvas" width = "800" height = "600" style="border:1px solid black;></canvas>
+<canvas id = "canvas" width = "800" height = "600" style = "border:1px solid black"></canvas>
 <p id = "label"></p>
 </body>
 <script>
 var canvas = document.getElementById("canvas");
-var s, t, w;
+var sc;
+var t, w;
 var milli = 20;
 var main = function()
 {
 	w = new World();
-	console.log("made world");
-	s = new Screen(canvas);
+	p = new Player();
+	sc = new DrawingScreen(canvas);
 	t = new Tracer(canvas, w);
-	
 	setInterval(tick, milli);
 }
-var tick = function()
-{
-	t.trace();
-	s.draw(t.getColumnDistance, t.getColumnColor);
+var tick = function(){
+	t.traceShit();
+	sc.drawShit(t.getColumnDistance());
+	console.log("TICK");
 }
 </script>
 </html>
