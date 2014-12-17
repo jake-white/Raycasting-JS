@@ -3,16 +3,16 @@ var FOV = 1;
 var Tracer = function(canvas, world){
 	c = canvas;
 	w = world;
-}
+};
 Tracer.prototype.traceShit = function() {
-	var columnDistance = new Array(c.width);
-	var columnColor = new Array(c.width);
+	columnDistance = new Array(c.width);
+	columnColor = new Array(c.width);
 	for (var i = 0; i < columnDistance.length; ++i) { // resetting columns
 		columnDistance[i] = -1;
 	}
 	var a = 0;
-	var pX = startingX;
-	var pY = startingY;
+	var pX = w.getStartingX();
+	var pY = w.getStartingY();
 	var inc = FOV / c.width;
 	var column = 0;
 	for (var currentAngle = a - FOV / 2; currentAngle < a
@@ -88,7 +88,7 @@ Tracer.prototype.traceShit = function() {
 		}
 
 		// first, horizontal checks
-		while (actY + checkDir < w.getHeight && actY + checkDir >= 0
+		while (actY + checkDir < w.getHeight() && actY + checkDir >= 0
 		&& actX < w.getWidth() && actX >= 0) {
 			if (w.isFilled(Math.floor(actX), Math.floor(actY)
 				+ checkDir)) { // checking for hits
@@ -239,22 +239,30 @@ var World = function()
 			}
 		}
 	}
-}
+};
 World.prototype.getImageData = function(x, y)
 {
 	return ImgD[x][y];
-}
+};
 	World.prototype.isFilled = function(x, y)
 	{
-		return (ImgD[x][y].data[0] == 255 && ImgD[x][y].data[1] == 255 && ImgD[x][y].data[2] == 255)
-	}
+		return !(ImgD[x][y].data[0] == 255 && ImgD[x][y].data[1] == 255 && ImgD[x][y].data[2] == 255);
+	};
 	World.prototype.getWidth = function()
 	{
 		return img.width;
-	}
+	};
 	World.prototype.getHeight = function()
 	{
 		return img.height;
-	}
+	};
+World.prototype.getStartingX = function()
+{
+	return startingX;
+};
+World.prototype.getStartingY = function()
+{
+	return startingY;
+};
 
-var Player = function(){}
+var Player = function(){};
