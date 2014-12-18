@@ -10,13 +10,13 @@ Tracer.prototype.traceShit = function() {
 	for (var i = 0; i < columnDistance.length; ++i) { // resetting columns
 		columnDistance[i] = -1;
 	}
-	var a = 0;
+	var a = w.getAngle();
 	var pX = w.getStartingX();
 	var pY = w.getStartingY();
 	var inc = FOV / c.width;
 	var column = 0;
-	for (var currentAngle = a - FOV / 2; currentAngle < a
-	+ FOV / 2; currentAngle += inc) {
+	for (var currentAngle = a - (FOV / 2); currentAngle < a
+	+ (FOV / 2); currentAngle += inc) {
 		var hor = 0, vert = 0;
 		var relX, relY, dX, dY;
 		var actX = 0, actY = 0;
@@ -26,6 +26,8 @@ Tracer.prototype.traceShit = function() {
 			workingAngle -= 2 * Math.PI;
 		else if (workingAngle < 0)
 			workingAngle += 2 * Math.PI;
+		if(currentAngle < 0)
+		console.log(workingAngle);
 		/*
 		 * now it is 0 to 2PI time to evaluate by quadrant STATUS:
 		 *
@@ -187,11 +189,6 @@ Tracer.prototype.traceShit = function() {
 		 * floor casting starts here, all done with walls! going pixel-by-pixel
 		 * hopefully it doesn't shit on the performance... here goes nothin
 		 */
-		for (var widthPX = 0; widthPX < c.width; ++widthPX) {
-			var height = columnDistance[column];
-
-		}
-
 		if (column < c.width - 1)
 			++column;
 	}
@@ -200,8 +197,10 @@ Tracer.prototype.getColumnDistance = function(){return columnDistance;}
 Tracer.prototype.getColumnColor = function(){return columnColor;}
 var img, ImgD;
 var startingX, startingY;
+var a;
 var World = function()
 {
+	a = 0;
 	img = new Image();
 	img.crossOrigin = 'anonymous';
 	img.src = 'res/world.png';
@@ -240,6 +239,18 @@ var World = function()
 		}
 	}
 };
+World.prototype.getAngle = function() {
+	return a;
+}
+World.prototype.setAngle = function(angle) {
+	while(angle > 2*Math.PI) {
+		angle -= 2 * Math.PI;
+	}
+	while(angle < -2*Math.PI) {
+		angle += 2 * Math.PI;
+	}
+	a = angle;
+}
 World.prototype.getImageData = function(x, y)
 {
 	return ImgD[x][y];

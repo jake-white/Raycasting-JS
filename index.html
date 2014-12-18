@@ -4,11 +4,16 @@
 <title>Raycasting Engine</title>
 <body onload = "main()">
 <canvas id = "canvas" width = "800" height = "600" style = "border:1px solid black"></canvas>
-<p id = "label"></p>
+<form>
+<button type = "button" id = "l" onclick = "w.setAngle(w.getAngle() - 0.1)";>left</button>
+	<button type = "button" id = "r" onclick = "w.setAngle(w.getAngle() + 0.1);">right</button>
+<p id = "angle"></p>
+</form>
 </body>
 <script>
 var canvas = document.getElementById("canvas");
 var sc;
+var angle = 0;
 var t, w;
 var milli = 20;
 var main = function()
@@ -20,6 +25,8 @@ var main = function()
 	setInterval(tick, milli);
 }
 var tick = function(){
+	document.getElementById("angle").innerHTML = w.getAngle();
+	//w.setAngle(w.getAngle(angle) + 0.1);
 	t.traceShit(w);
 	sc.drawShit(t.getColumnDistance());
 }
